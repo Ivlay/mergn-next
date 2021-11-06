@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 
-import Button from 'components/UI/Button';
+import { Button } from 'components/UI';
 
 const Home: NextPage = () => {
   return (

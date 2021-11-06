@@ -1,10 +1,10 @@
-import { NextPage } from 'next';
 import Head from 'next/head';
+import type { NextPage } from 'next';
+import type { AppProps } from 'next/dist/shared/lib/router/router';
 import { ThemeProvider } from 'styled-components';
-import { AppProps } from 'next/dist/shared/lib/router/router';
 
-import { themes } from 'styles/theme';
 import GlobalStyle from 'styles/globalStyles';
+import { themes } from 'styles/theme';
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 	return (
