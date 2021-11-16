@@ -2,10 +2,11 @@ import { memo, ReactNode } from 'react';
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 
 interface Button {
-  children?: ReactNode
+  children?: ReactNode;
+  isLoading?: boolean
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<Button>`
   position: relative;
   padding: 4px 7px;
   border: none;
@@ -27,9 +28,9 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button: React.FC<StyledComponentProps<"button", DefaultTheme, Button, never>> = ({ children, ...rest }) => {
+const Button: React.FC<StyledComponentProps<'button', DefaultTheme, Button, never>> = ({ children, isLoading, ...rest }) => {
   return (
-    <StyledButton {...rest}>
+    <StyledButton {...rest} isLoading={isLoading}>
       {children}
     </StyledButton>
   );
