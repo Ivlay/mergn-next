@@ -9,12 +9,8 @@ const Home: NextPage = () => {
   return (
     <div>
       landing
-      <Button>
-        fiva
-      </Button>
-      <Link href={LOGIN}>
-        Login page
-      </Link>
+      <Button>fiva</Button>
+      <Link href={LOGIN}>Login page</Link>
     </div>
   );
 };

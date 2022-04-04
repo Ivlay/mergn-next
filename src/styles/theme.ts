@@ -1,6 +1,5 @@
 declare module 'styled-components' {
-  export interface DefaultTheme extends PropertiesThemes {
-  }
+  export interface DefaultTheme extends PropertiesThemes {}
 }
 
 export type Theme = 'dark' | 'light';
@@ -14,11 +13,11 @@ export const themes = {
     button: {
       gradient: {
         1: '#DA5201',
-        2: '#F8772B'
+        2: '#F8772B',
       },
-      color: '#FFDBAD'
+      color: '#FFDBAD',
     },
-    border: '#ADADB53D'
+    border: '#ADADB53D',
   },
   light: {
     backgroundColor: '#FFF',
@@ -26,10 +25,10 @@ export const themes = {
     button: {
       gradient: {
         1: '#137272',
-        2: '#1A8F89'
+        2: '#1A8F89',
       },
-      color: '#FFF'
+      color: '#FFF',
     },
-    border: '#ADADB59C'
-  }
+    border: '#ADADB59C',
+  },
 };

@@ -3,7 +3,7 @@ import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 
 interface Button {
   children?: ReactNode;
-  isLoading?: boolean
+  isLoading?: boolean;
 }
 
 const StyledButton = styled.button<Button>`

@@ -8,16 +8,16 @@ import apolloClient from 'ApolloClient';
 import MainLayout from 'layouts/MainLayout';
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
-	return (
-		<ApolloProvider client={apolloClient}>
-			<MainLayout>
-				<Head>
-					<title>Title</title>
-				</Head>
-				<Component {...pageProps} />
-			</MainLayout>
-		</ApolloProvider>
-	);
+  return (
+    <ApolloProvider client={apolloClient}>
+      <MainLayout>
+        <Head>
+          <title>Title</title>
+        </Head>
+        <Component {...pageProps} />
+      </MainLayout>
+    </ApolloProvider>
+  );
 };
 
 export default App;
