@@ -1,10 +1,12 @@
 import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { useMutation } from '@apollo/client';
 
 import { INPUTS } from './constants/index';
 
 import { Button, Input } from 'components/UI';
+import { LOGIN } from 'graphql/Post';
 
 interface FormInput {
   username: string;
@@ -26,7 +28,16 @@ const Login: NextPage = () => {
     formState: { errors },
   } = useForm<FormInput>();
 
-  const onSubmit = (data: FormInput) => console.log(data);
+  const [login, { data, loading, error }] = useMutation(LOGIN);
+
+  const onSubmit = (values: FormInput) => {
+    login({
+      variables: {
+        username: values.password,
+        password: values.password,
+      },
+    });
+  };
 
   return (
     <div>
