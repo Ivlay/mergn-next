@@ -21,11 +21,13 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["react", "@typescript-eslint/eslint-plugin"],
   "rules": {
+    "no-plusplus": "off",
+    "linebreak-style": ["error", "windows"],
     "no-console": "warn",
-		"linebreak-style": ["error", "windows"],
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "react/require-default-props": "off",
     "react/jsx-no-bind": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "@next/next/no-img-element": "off",
     "react/react-in-jsx-scope": "off",
     "jsx-a11y/click-events-have-key-events": "off",
@@ -41,6 +43,7 @@
         "namedComponents": "arrow-function"
       }
     ],
+    "import/no-unresolved": "off",
     "react/jsx-props-no-spreading": "off",
     "arrow-body-style": "off",
     "implicit-arrow-linebreak": "off",
@@ -66,7 +69,24 @@
         "mjs": "never"
       }
     ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["href"]
+      }
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "assert": "either"
+      }
+    ],
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["draft", "config", "acc"] }
+    ],
     "@typescript-eslint/no-unused-vars": "warn"
   }
 }
