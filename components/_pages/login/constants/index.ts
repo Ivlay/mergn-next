@@ -1,6 +1,6 @@
 import { Input } from 'types';
 
-export const INPUTS: Input[] = [
+export const INPUTS: Input<'username' | 'password'>[] = [
   {
     name: 'username',
     placeholder: 'Username or email',

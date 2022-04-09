@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { INPUTS } from './constants/index';
@@ -7,7 +7,7 @@ import { INPUTS } from './constants/index';
 import { Button, Input } from 'components/UI';
 
 interface FormInput {
-  login: string;
+  username: string;
   password: string;
 }
 
@@ -24,9 +24,9 @@ const Login: NextPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormInput>();
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+  const onSubmit = (data: FormInput) => console.log(data);
 
   return (
     <div>
@@ -37,7 +37,6 @@ const Login: NextPage = () => {
               helperText={errors?.[itemInput.name]?.message}
               placeholder={itemInput.placeholder}
               key={itemInput.name}
-              name={itemInput.name}
               type={itemInput.type}
               {...register(itemInput.name, itemInput.rules)}
             />
