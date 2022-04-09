@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { INPUTS } from './constants/index';
 
-import { Button, Input } from 'src/components/UI';
+import { Button, Input } from 'components/UI';
 
 interface FormInput {
   login: string;

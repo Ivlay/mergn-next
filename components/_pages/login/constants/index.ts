@@ -1,4 +1,4 @@
-import { Input } from 'src/types';
+import { Input } from 'types';
 
 export const INPUTS: Input[] = [
   {
