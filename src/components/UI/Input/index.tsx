@@ -1,6 +1,21 @@
-import { memo } from 'react';
+import { memo, forwardRef } from 'react';
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
-import { forwardRef } from 'react';
+
+interface InputProps {
+  helperText?: string;
+}
+
+const InputContainer = styled.div`
+  width: 100%;
+  max-width: 200px;
+  min-height: 80px;
+`;
+
+const ErrorMessage = styled.p`
+  margin-top: 5px;
+  color: ${(props) => props.theme.errorText};
+  font-size: 10px;
+`;
 
 const InputStyle = styled.input`
   height: 48px;
@@ -26,9 +41,14 @@ const InputStyle = styled.input`
   }
 `;
 
-const Input: React.FC<StyledComponentProps<'input', DefaultTheme, {}, never>> = forwardRef(
-  ({ ...rest }, ref) => {
-    return <InputStyle ref={ref} {...rest} />;
+const Input: React.FC<StyledComponentProps<'input', DefaultTheme, InputProps, never>> = forwardRef(
+  ({ helperText, ...rest }, ref) => {
+    return (
+      <InputContainer>
+        <InputStyle ref={ref} {...rest} />
+        {helperText && <ErrorMessage>{helperText}</ErrorMessage>}
+      </InputContainer>
+    );
   },
 );
 
