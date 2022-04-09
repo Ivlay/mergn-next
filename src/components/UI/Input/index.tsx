@@ -52,4 +52,6 @@ const Input: React.FC<StyledComponentProps<'input', DefaultTheme, InputProps, ne
   },
 );
 
+Input.displayName = 'Input';
+
 export default memo(Input);

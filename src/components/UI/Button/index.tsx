@@ -13,11 +13,11 @@ const StyledButton = styled.button<Button>`
   border-radius: 2px;
   background-color: transparent;
   background-image: linear-gradient(
-        312.44deg, ${props => props.theme.button.gradient[1]} 0%,
-        ${props => props.theme.button.gradient[2]} 100%
+        312.44deg, ${(props) => props.theme.button.gradient[1]} 0%,
+        ${(props) => props.theme.button.gradient[2]} 100%
     );
 
-  color: ${props => props.theme.button.color};
+  color: ${(props) => props.theme.button.color};
   font-family: 'Lato', sans-serif;
   cursor: pointer;
   text-decoration: none;

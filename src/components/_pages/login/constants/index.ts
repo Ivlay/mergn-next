@@ -1,5 +1,4 @@
-import { Input } from "src/types";
-
+import { Input } from 'src/types';
 
 export const INPUTS: Input[] = [
   {
@@ -8,8 +7,8 @@ export const INPUTS: Input[] = [
     rules: {
       required: {
         value: true,
-        message: 'This field is required'
-      }
+        message: 'This field is required',
+      },
     },
     type: 'text',
   },
@@ -19,8 +18,8 @@ export const INPUTS: Input[] = [
     rules: {
       required: {
         value: true,
-        message: 'This field is required'
-      }
+        message: 'This field is required',
+      },
     },
     type: 'password',
   },

@@ -1,41 +1,32 @@
 import { NextPage } from 'next';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
-
-import { LOGIN } from 'graphql/Post';
-import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
-
-import { Button, Input } from 'src/components/UI';
+import styled from 'styled-components';
 
 import { INPUTS } from './constants/index';
 
-interface IFormInput {
+import { Button, Input } from 'src/components/UI';
+
+interface FormInput {
   login: string;
   password: string;
 }
 
-const FormContainer = styled.form `
+const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 30px 0;
-`
+`;
 
 const Login: NextPage = () => {
-  const [getPosts, { data }] = useMutation(LOGIN);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
-
-  const loadPost = () => {
-    getPosts();
-  };
+  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
 
   return (
     <div>
