@@ -43,7 +43,6 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "import/no-unresolved": "off",
     "react/jsx-props-no-spreading": "off",
     "arrow-body-style": "off",
     "implicit-arrow-linebreak": "off",
@@ -85,7 +84,7 @@
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "no-param-reassign": [
       "error",
-      { "props": true, "ignorePropertyModificationsFor": ["draft", "config", "acc"] }
+      { "props": true, "ignorePropertyModificationsFor": ["draft", "config", "acc", "ctx"] }
     ],
     "@typescript-eslint/no-unused-vars": "warn"
   }
