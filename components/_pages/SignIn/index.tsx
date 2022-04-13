@@ -2,8 +2,12 @@ import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
+import Router from 'next/router';
+import { useState, useEffect } from 'react';
 
 import { INPUTS } from './constants/index';
+import { USER_TOKEN } from 'constants/constants';
+import { START_PAGE } from 'constants/routes';
 
 import { SIGN_IN } from 'graphql/Post';
 
@@ -37,6 +41,21 @@ const SignIn: NextPage = () => {
 
   const [login, { data, loading, error }] = useMutation(SIGN_IN);
 
+  const [loggedIt, setLoggedIt] = useState(false);
+
+  useEffect(() => {
+    if (loggedIt) return;
+    if (data) {
+      Router.replace(START_PAGE);
+      localStorage.setItem(USER_TOKEN, JSON.stringify(data.login.access_token));
+      setLoggedIt(true);
+    }
+    if (localStorage.getItem(USER_TOKEN)) {
+      setLoggedIt(true);
+      Router.replace(START_PAGE);
+    }
+  }, [data]);
+
   const onSubmit = (values: FormInput) => {
     login({
       variables: {
@@ -66,7 +85,6 @@ const SignIn: NextPage = () => {
         <Button type="submit">Оправить</Button>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </FormContainer>
-
     </div>
   );
 };
