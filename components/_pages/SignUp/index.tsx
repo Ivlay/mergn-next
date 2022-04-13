@@ -14,7 +14,6 @@ interface FormInput {
   email: string;
   password: string;
   confirmPassword: string;
-  confirm: string;
 }
 
 const FormContainer = styled.form`
@@ -75,7 +74,6 @@ const SignUp: NextPage = () => {
         })}
         <Button type="submit">Submit</Button>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
-        {errors.confirm && <ErrorMessage>{errors.confirm}</ErrorMessage>}
       </FormContainer>
     </div>
   );

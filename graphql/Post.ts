@@ -14,11 +14,11 @@ export const SIGN_IN = gql`
 export const SIGN_UP = gql`
   mutation Signup($email: String!, $username: String!, $password: String!, $confirmPassword: String!) {
     signup(createUserInput: { email: $email, username: $username, password: $password, confirmPassword: $confirmPassword }) {
-      id
-      createdAt
-      updatedAt
-      username
-      email
+      access_token
+      user {
+        email
+        id
+      }
     }
   }
 `;
