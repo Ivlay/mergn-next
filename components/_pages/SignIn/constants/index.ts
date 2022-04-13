@@ -9,10 +9,6 @@ export const INPUTS: Input<'username' | 'password'>[] = [
         value: true,
         message: 'This field is required',
       },
-      pattern: {
-        value: /^[a-zA-Z0-9]+$/,
-        message: '',
-      },
     },
     type: 'text',
   },

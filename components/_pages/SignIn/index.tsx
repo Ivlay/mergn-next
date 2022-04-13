@@ -5,8 +5,9 @@ import { useMutation } from '@apollo/client';
 
 import { INPUTS } from './constants/index';
 
-import { Button, Input } from 'components/UI';
 import { SIGN_IN } from 'graphql/Post';
+
+import { Button, Input } from 'components/UI';
 
 interface FormInput {
   username: string;
@@ -14,11 +15,11 @@ interface FormInput {
 }
 
 const FormContainer = styled.form`
+  margin: 30px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
 `;
 
 const ErrorMessage = styled.p`

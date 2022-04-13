@@ -5,23 +5,24 @@ import { useMutation } from '@apollo/client';
 
 import { INPUTS } from './constants/index';
 
-import { Button, Input } from 'components/UI';
-
 import { SIGN_UP } from 'graphql/Post';
+
+import { Button, Input } from 'components/UI';
 
 interface FormInput {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
+  confirm: string;
 }
 
 const FormContainer = styled.form`
+  margin: 30px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
 `;
 
 const ErrorMessage = styled.p`
@@ -34,23 +35,28 @@ const SignUp: NextPage = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<FormInput>();
 
   const [signup, { data, loading, error }] = useMutation(SIGN_UP);
 
   const onSubmit = (values: FormInput) => {
-    signup({
-      variables: {
-        email: values.email,
-        username: values.username,
-        password: values.password,
-        confirmPassword: values.confirmPassword,
-      },
-      onError(err) {
-        console.log(err);
-      },
-    });
+    if (values.confirmPassword === values.password) {
+      signup({
+        variables: {
+          email: values.email,
+          username: values.username,
+          password: values.password,
+          confirmPassword: values.confirmPassword,
+        },
+        onError(err) {
+          console.log(err);
+        },
+      });
+    } else {
+      setError('confirmPassword', { type: 'required', message: 'Passwords do not match' });
+    }
   };
 
   return (
@@ -67,8 +73,9 @@ const SignUp: NextPage = () => {
             />
           );
         })}
-        <Button type="submit">Оправить</Button>
+        <Button type="submit">Submit</Button>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
+        {errors.confirm && <ErrorMessage>{errors.confirm}</ErrorMessage>}
       </FormContainer>
     </div>
   );
