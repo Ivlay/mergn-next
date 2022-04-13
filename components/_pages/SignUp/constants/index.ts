@@ -22,7 +22,7 @@ export const INPUTS: Input<'username' | 'password' | 'email' | 'confirmPassword'
       },
       pattern: {
         value: /^[a-zA-Z0-9]+$/,
-        message: '',
+        message: 'Username can only contain alphabets and number',
       },
     },
     type: 'text',
