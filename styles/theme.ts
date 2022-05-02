@@ -1,5 +1,5 @@
 declare module 'styled-components' {
-  export interface DefaultTheme extends PropertiesThemes {}
+  export interface DefaultTheme extends PropertiesThemes { }
 }
 
 export type Theme = 'dark' | 'light';
@@ -33,5 +33,5 @@ export const themes = {
     border: '#ADADB59C',
     errorText: '#944b4b'
   },
-  
+
 };

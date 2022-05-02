@@ -1,36 +1,42 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
+import { useQuery } from '@apollo/client';
 
-import { Textarea, Header, Button } from 'components/UI';
+import { POSTS } from 'graphql/Post';
+
+import { PostItem } from 'components/UI';
+import CreatePostText from '../../UI/CreatePostTextarea';
+
+interface IPostItem {
+  id: string;
+  body: string;
+}
 
 const StartPageStyleContainer = styled.div`
   max-width: 900px;
   width: 100%;
-  height: 650px;
+  height: 100%;
   margin: 50px auto;
   background-color: #525151;
   border-radius: 10px;
 `;
 
-const StyledButton = styled(Button)`
-  font-size: 24px;
-  padding: 5px 15px;
-  width: 200px;
-`;
-
-const ContainerItem = styled.div`
-  width: 800px;
-  margin: 0 auto;
-`;
-
 const Start: NextPage = () => {
+  const { loading, data, refetch } = useQuery(POSTS);
   return (
     <StartPageStyleContainer>
-      <ContainerItem>
-        <Header>NEWS</Header>
-        <Textarea placeholder="Anything new?" />
-        <StyledButton>Submit</StyledButton>
-      </ContainerItem>
+      <CreatePostText refetch={refetch}>Sub</CreatePostText>
+      {!loading ? (
+        data.posts.map((element: IPostItem) => {
+          return (
+            <PostItem itemId={element.id} key={element.id}>
+              {element.body}
+            </PostItem>
+          );
+        })
+      ) : (
+        <p>loading</p>
+      )}
     </StartPageStyleContainer>
   );
 };

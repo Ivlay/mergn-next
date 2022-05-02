@@ -9,8 +9,13 @@ export const INPUTS: Input<'username' | 'password' | 'email' | 'confirmPassword'
         value: true,
         message: 'This field is required',
       },
+      pattern: {
+        /* eslint-disable-next-line */
+        value: /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
+        message: 'Incorrect email',
+      },
     },
-    type: 'email',
+    type: 'text',
   },
   {
     name: 'username',

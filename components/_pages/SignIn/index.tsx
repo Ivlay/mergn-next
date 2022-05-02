@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useMutation } from '@apollo/client';
 import Router from 'next/router';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { INPUTS } from './constants/index';
-import { USER_TOKEN } from 'constants/constants';
 import { START_PAGE } from 'constants/routes';
 
 import { SIGN_IN } from 'graphql/Post';
@@ -39,23 +38,7 @@ const SignIn: NextPage = () => {
     formState: { errors },
   } = useForm<FormInput>();
 
-  const [login, { data, loading, error }] = useMutation(SIGN_IN);
-
-  const [loggedIt, setLoggedIt] = useState(false);
-
-  useEffect(() => {
-    if (loggedIt) return;
-    if (data) {
-      Router.replace(START_PAGE);
-      localStorage.setItem(USER_TOKEN, JSON.stringify(data.login.access_token));
-      setLoggedIt(true);
-    }
-    if (localStorage.getItem(USER_TOKEN)) {
-      setLoggedIt(true);
-      Router.replace(START_PAGE);
-    }
-  }, [data]);
-
+  const [login, { data, error }] = useMutation(SIGN_IN);
   const onSubmit = (values: FormInput) => {
     login({
       variables: {
@@ -67,6 +50,13 @@ const SignIn: NextPage = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('token', data.login.access_token);
+      Router.replace(START_PAGE);
+    }
+  }, [data]);
 
   return (
     <div>
