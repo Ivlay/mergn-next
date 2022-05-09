@@ -34,6 +34,12 @@ const ErrorMessage = styled.p`
   font-size: 10px;
 `;
 
+const InpunContainerStyled = styled.div`
+  max-width: 200px;
+  min-height: 80px;
+  margin-bottom: 30px;
+`;
+
 const SignUp: NextPage = () => {
   const {
     register,
@@ -75,17 +81,19 @@ const SignUp: NextPage = () => {
   return (
     <div>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
-        {INPUTS.map((itemInput) => {
-          return (
-            <Input
-              helperText={errors?.[itemInput.name]?.message}
-              placeholder={itemInput.placeholder}
-              key={itemInput.name}
-              type={itemInput.type}
-              {...register(itemInput.name, itemInput.rules)}
-            />
-          );
-        })}
+        <InpunContainerStyled>
+          {INPUTS.map((itemInput) => {
+            return (
+              <Input
+                helperText={errors?.[itemInput.name]?.message}
+                placeholder={itemInput.placeholder}
+                key={itemInput.name}
+                type={itemInput.type}
+                {...register(itemInput.name, itemInput.rules)}
+              />
+            );
+          })}
+        </InpunContainerStyled>
         <Button type="submit">Submit</Button>
         {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </FormContainer>

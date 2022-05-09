@@ -1,15 +1,14 @@
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 import { useMutation } from '@apollo/client';
 
-import { CREATE_POST } from 'graphql/Post';
+import { CREATE_POST, POSTS } from 'graphql/Post';
 
 import { Textarea, Header, Button } from 'components/UI';
 import { useForm } from 'react-hook-form';
 import { TEXTAREA } from './constants';
 
 interface CreatePostTextarea {
-  children: string;
-  refetch: any;
+  children?: string;
 }
 
 interface FormTextarea {
@@ -23,17 +22,17 @@ const StyledButton = styled(Button)`
 `;
 
 const ContainerItem = styled.form`
-  width: 800px;
-  margin-left: 10px;
-  margin-bottom: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column; ;
 `;
 
-const CreatePostArea: React.FC<
+const CreatePostTextarea: React.FC<
   StyledComponentProps<'div', DefaultTheme, CreatePostTextarea, never>
-> = ({ children, refetch }) => {
+> = ({ children }) => {
   const [createPost] = useMutation(CREATE_POST);
 
-  const { register, handleSubmit } = useForm<FormTextarea>();
+  const { register, handleSubmit, setValue } = useForm<FormTextarea>();
 
   const onSubmit = (values: FormTextarea) => {
     createPost({
@@ -44,8 +43,9 @@ const CreatePostArea: React.FC<
         console.log(err);
       },
       onCompleted() {
-        refetch();
+        setValue('body', '');
       },
+      refetchQueries: [POSTS],
     });
   };
 
@@ -62,4 +62,4 @@ const CreatePostArea: React.FC<
   );
 };
 
-export default CreatePostArea;
+export default CreatePostTextarea;

@@ -1,15 +1,14 @@
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
-import { useMutation } from '@apollo/client';
-import { CREATE_COMMENT } from 'graphql/Post';
+import { useMutation, useQuery } from '@apollo/client';
+import { CREATE_COMMENT, POST } from 'graphql/Post';
 import { useForm } from 'react-hook-form';
 
-import InputComment from 'components/UI/InputComment';
+import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
 import { INPUT } from './constants';
 
 interface PostItemCommentProps {
   itemId: string;
-  comments: any;
 }
 
 interface FormInput {
@@ -19,16 +18,20 @@ interface FormInput {
 interface IPostItem {
   id: string;
   body: string;
+  username: string;
 }
 
 const CommentsStyleContainer = styled.div`
-  border: 1px #fff solid;
   margin-top: 10px;
 `;
 
 const CommentsItemStyled = styled.div`
   color: ${(props) => props.theme.color};
   margin: 5px 0;
+  border: 1px solid #767676;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: ${(props) => props.theme.backgroundColor};
   display: flex;
 `;
 const CommentUsernameStyled = styled.div`
@@ -45,47 +48,56 @@ const CommentMessageStyled = styled.div`
 
 const FormStyled = styled.form`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
 `;
 const PostItemComment: React.FC<
   StyledComponentProps<'div', DefaultTheme, PostItemCommentProps, never>
-> = ({ itemId, comments }) => {
-  const { register, handleSubmit } = useForm<FormInput>();
+> = ({ itemId }) => {
+  const { register, handleSubmit, setValue } = useForm<FormInput>();
 
-  const [createComment] = useMutation(CREATE_COMMENT);
+  const [AddCommnet] = useMutation(CREATE_COMMENT);
+  const { data, loading } = useQuery(POST, {
+    variables: {
+      postId: itemId,
+    },
+  });
 
   const onSubmit = (values: FormInput) => {
-    createComment({
+    AddCommnet({
       variables: {
         body: values.body,
         postId: itemId,
       },
       onError(err) {
-        console.log(err);
+        console.log(err.message);
       },
+      onCompleted() {
+        setValue('body', '');
+      },
+      refetchQueries: [POST],
     });
   };
-
+  if (loading) return <div>loading...</div>;
   return (
     <CommentsStyleContainer>
-      {comments
-        ? comments.map((item: IPostItem) => {
-            return (
-              <CommentsItemStyled key={item.id}>
-                <CommentUsernameStyled>LKAMA</CommentUsernameStyled>
-                <CommentMessageStyled>{item.body}</CommentMessageStyled>
-              </CommentsItemStyled>
-            );
-          })
-        : console.log(comments)}
+      {data.post.comments.map((item: IPostItem) => {
+        return (
+          <CommentsItemStyled key={item.id}>
+            <CommentUsernameStyled>{item.username}</CommentUsernameStyled>
+            <CommentMessageStyled>{item.body}</CommentMessageStyled>
+          </CommentsItemStyled>
+        );
+      })}
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
-        <InputComment
+        <Input
           placeholder={INPUT.placeholder}
           key={INPUT.name}
           type={INPUT.type}
           {...register(INPUT.name, INPUT.rules)}
         />
-        <Button type="submit" style={{ margin: '0 5px' }}>
+        <Button type="submit" style={{ margin: '0 5px', padding: '5px 20px' }}>
           Sub!
         </Button>
       </FormStyled>

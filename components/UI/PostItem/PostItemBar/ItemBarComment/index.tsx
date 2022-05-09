@@ -2,6 +2,7 @@ import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 
 interface ItemBarCommentProps {
   children?: string;
+  counterComment: number;
 }
 
 const ItemCommentStyled = styled.div`
@@ -19,7 +20,7 @@ const ItemCommentContainer = styled.div`
 
 const ItemBarComment: React.FC<
   StyledComponentProps<'div', DefaultTheme, ItemBarCommentProps, never>
-> = () => {
+> = ({ counterComment }) => {
   return (
     <ItemCommentContainer>
       <ItemCommentStyled>
@@ -35,7 +36,7 @@ const ItemBarComment: React.FC<
             </g>
           </svg>
         </span>
-        <span>303</span>
+        <span>{counterComment}</span>
       </ItemCommentStyled>
     </ItemCommentContainer>
   );

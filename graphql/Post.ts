@@ -5,7 +5,7 @@ export const SIGN_IN = gql`
     login(loginUserInput: { username: $username, password: $password }) {
       access_token
       user {
-        email
+        username
         id
       }
     }
@@ -50,14 +50,16 @@ export const POSTS = gql`
 `;
 
 export const POST = gql`
-  query Post($postId: String!) {
+  query Post($postId: ID!) {
     post(postId: $postId) {
       id
-      likesCount
       username
+      likesCount
+      commentsCount
       comments {
         id
         body
+        username
       }
     }
   }
@@ -82,10 +84,25 @@ export const LIKE_POST = gql`
 `;
 
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($body: String!, $postId: String!) {
+  mutation AddCommnet($body: String!, $postId: ID!) {
     createComment(createCommentInput: { body: $body, postId: $postId }) {
-      id
       body
+      username
+      id
+    }
+  }
+`;
+
+export const DELETE_POST = gql`
+  mutation DeletePost($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`;
+
+export const CURENT_USER = gql`
+  query {
+    currentUser {
+      username
     }
   }
 `;

@@ -7,8 +7,6 @@ interface InputProps {
 
 const InputContainer = styled.div`
   width: 100%;
-  max-width: 200px;
-  min-height: 80px;
 `;
 
 const ErrorMessage = styled.p`

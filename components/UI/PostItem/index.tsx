@@ -17,7 +17,7 @@ const PostItemContainer = styled.div`
 `;
 
 const ItemContainerStyled = styled.div`
-  margin: 10px;
+  margin: 25px 0;
 `;
 
 const ItemStyled = styled.div`
@@ -36,19 +36,25 @@ const PostItem: React.FC<StyledComponentProps<'div', DefaultTheme, PostItemProps
   children,
   itemId,
 }) => {
-  const { data } = useQuery(POST, {
+  const { data, loading } = useQuery(POST, {
     variables: {
       postId: itemId,
     },
   });
+  if (loading) return <div>loading...</div>;
 
   return (
     <PostItemContainer>
       <ItemContainerStyled>
         <ItemStyled>{children}</ItemStyled>
-        <ItemUsernameStyled>{data ? data.post.username : null}</ItemUsernameStyled>
-        <PostItemBar counterLike={data ? data.post.likesCount : 0} itemId={itemId} />
-        <PostItemComment comments={data ? data.comments : []} itemId={itemId} />
+        <ItemUsernameStyled>{data.post.username}</ItemUsernameStyled>
+        <PostItemBar
+          counterComment={data.post.commentsCount}
+          counterLike={data.post.likesCount}
+          itemId={itemId}
+          postUsername={data.post.username}
+        />
+        <PostItemComment itemId={itemId} />
       </ItemContainerStyled>
     </PostItemContainer>
   );

@@ -1,6 +1,8 @@
 import { memo, forwardRef } from 'react';
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 
+import TextareaAutosize from 'react-autosize-textarea';
+
 interface AreaProps {
   value?: string;
 }
@@ -9,18 +11,16 @@ const AreaContainer = styled.div`
   width: 100%;
 `;
 
-const AreaStyle = styled.textarea`
-  max-width: 500px;
-  min-height: 100px;
+const AreaStyle = styled(TextareaAutosize)`
+  height: 50px;
   width: 100%;
-  resize: none;
   background-color: ${(props) => props.theme.backgroundColor};
   color: ${(props) => props.theme.color};
   border-radius: 10px;
-  overflow: scroll;
-  margin: 15px 0;
   padding: 10px;
   font-size: 18px;
+  overflow: scroll;
+  resize: none;
 
   &::-webkit-scrollbar {
     display: none;
@@ -41,13 +41,14 @@ const AreaStyle = styled.textarea`
   }
 `;
 
-const Textarea: React.FC<StyledComponentProps<'textarea', DefaultTheme, AreaProps, never>> = forwardRef(({ ...rest }, ref) => {
-  return (
-    <AreaContainer>
-      <AreaStyle ref={ref} {...rest} />
-    </AreaContainer>
-  );
-});
+const Textarea: React.FC<StyledComponentProps<'textarea', DefaultTheme, AreaProps, never>> =
+  forwardRef(({ ...rest }, ref) => {
+    return (
+      <AreaContainer>
+        <AreaStyle ref={ref} {...rest} />
+      </AreaContainer>
+    );
+  });
 
 Textarea.displayName = 'Textarea';
 export default memo(Textarea);
