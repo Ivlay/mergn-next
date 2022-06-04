@@ -20,6 +20,10 @@ export const INPUTS: Input<'username' | 'password'>[] = [
         value: true,
         message: 'This field is required',
       },
+      pattern: {
+        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+        message: 'The password must get one uppercase letter, one small letter, the number of characters must be between 6 and 15',
+      },
     },
     type: 'password',
   },

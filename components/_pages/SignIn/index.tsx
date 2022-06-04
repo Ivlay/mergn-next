@@ -5,8 +5,9 @@ import { useMutation } from '@apollo/client';
 
 import { INPUTS } from './constants/index';
 
+import { SIGN_IN } from 'graphql/Post';
+
 import { Button, Input } from 'components/UI';
-import { LOGIN } from 'graphql/Post';
 
 interface FormInput {
   username: string;
@@ -14,27 +15,36 @@ interface FormInput {
 }
 
 const FormContainer = styled.form`
+  margin: 30px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 30px 0;
 `;
 
-const Login: NextPage = () => {
+const ErrorMessage = styled.p`
+  margin-top: 5px;
+  color: ${(props) => props.theme.errorText};
+  font-size: 10px;
+`;
+
+const SignIn: NextPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInput>();
 
-  const [login, { data, loading, error }] = useMutation(LOGIN);
+  const [login, { data, loading, error }] = useMutation(SIGN_IN);
 
   const onSubmit = (values: FormInput) => {
     login({
       variables: {
-        username: values.password,
+        username: values.username,
         password: values.password,
+      },
+      onError(err) {
+        console.log(err);
       },
     });
   };
@@ -54,9 +64,11 @@ const Login: NextPage = () => {
           );
         })}
         <Button type="submit">Оправить</Button>
+        {error && <ErrorMessage>{error.message}</ErrorMessage>}
       </FormContainer>
+
     </div>
   );
 };
 
-export default Login;
+export default SignIn;
