@@ -10,3 +10,13 @@ export interface Input<T> {
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
 }
+
+export interface Textarea<T> {
+  name: T;
+  placeholder: string;
+  rules?: Omit<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    RegisterOptions<any, any>,
+    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+  >;
+}

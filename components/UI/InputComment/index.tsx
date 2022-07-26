@@ -1,7 +1,7 @@
 import { memo, forwardRef } from 'react';
 import styled, { DefaultTheme, StyledComponentProps } from 'styled-components';
 
-interface InputProps {
+interface InputCommentProps {
   helperText?: string;
 }
 
@@ -16,13 +16,12 @@ const ErrorMessage = styled.p`
 `;
 
 const InputStyle = styled.input`
-  height: 48px;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid ${(props) => props.theme.color};
   color: ${(props) => props.theme.color};
-  background-color: transparent;
-  padding: 9px 16px;
+  background-color: ${(props) => props.theme.backgroundColor};
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px #767676 solid;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -39,17 +38,17 @@ const InputStyle = styled.input`
   }
 `;
 
-const Input: React.FC<StyledComponentProps<'input', DefaultTheme, InputProps, never>> = forwardRef(
-  ({ helperText, ...rest }, ref) => {
-    return (
-      <InputContainer>
-        <InputStyle ref={ref} {...rest} />
-        {helperText && <ErrorMessage>{helperText}</ErrorMessage>}
-      </InputContainer>
-    );
-  },
-);
+const InputComment: React.FC<
+  StyledComponentProps<'input', DefaultTheme, InputCommentProps, never>
+> = forwardRef(({ helperText, ...rest }, ref) => {
+  return (
+    <InputContainer>
+      <InputStyle ref={ref} {...rest} />
+      {helperText && <ErrorMessage>{helperText}</ErrorMessage>}
+    </InputContainer>
+  );
+});
 
-Input.displayName = 'Input';
+InputComment.displayName = 'Input';
 
-export default memo(Input);
+export default memo(InputComment);

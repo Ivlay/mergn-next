@@ -18,7 +18,7 @@ export const themes = {
       color: '#FFDBAD',
     },
     border: '#ADADB53D',
-    errorText: '#944b4b'
+    errorText: '#944b4b',
   },
   light: {
     backgroundColor: '#FFF',
@@ -31,7 +31,6 @@ export const themes = {
       color: '#FFF',
     },
     border: '#ADADB59C',
-    errorText: '#944b4b'
+    errorText: '#944b4b',
   },
-  
 };
